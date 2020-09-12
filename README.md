@@ -62,3 +62,15 @@ You’ll often see the words “state” and “store” used interchangeably. T
 - Redux called your reducer at the time you created the store.
 - A Redux reducer is a function with a signature `(state, action) => newState`; reduces a set of actions (over time) into a single state; happens over the lifetime of your running app. It has another job, too: It should return the initial state the first time it’s called.
 - **Important Rule of Reducers #1**: Never return undefined from a reducer.
+
+# Dispatch Actions to Change the State
+
+---
+
+- An **action** is Redux-speak for a plain object with a property called `type`.
+- ... we Redux users usually give our actions types that are **plain strings**, and often uppercased, to signify that they’re meant to be constant values.
+- Actions, despite their active-sounding name, ... don’t really _do_ anything ... on their own... In order to make an action DO something, you need to **dispatch** it.
+
+The store we created earlier has a built-in function called `dispatch`. Call it with an action, and Redux will call your reducer with that action (and then replace the state with whatever your reducer returned).
+
+Every call to `dispatch` results in a call to your reducer!

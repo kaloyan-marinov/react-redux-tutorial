@@ -32,13 +32,27 @@ const initialState = {
 };
 
 function reducer(state = initialState, action) {
-  console.log("reducer runs", state, action);
-  return state;
+  console.log("reducer starts running with", state, action);
+
+  switch (action.type) {
+    case "INCREMENT":
+      return { count: state.count + 1 };
+    case "DECREMENT":
+      return { count: state.count - 1 };
+    case "RESET":
+      return { count: 0 };
+    default:
+      return state;
+  }
 }
 
 const store = createStore(reducer);
-
 console.log("the store has just been created");
+
+store.dispatch({ type: "INCREMENT" });
+store.dispatch({ type: "INCREMENT" });
+store.dispatch({ type: "DECREMENT" });
+store.dispatch({ type: "RESET" });
 
 class Counter extends React.Component {
   state = { count: 0 };
