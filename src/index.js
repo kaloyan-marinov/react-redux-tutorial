@@ -58,9 +58,13 @@ store.dispatch({ type: "RESET" });
 store.dispatch({ type: "DECREMENT" });
 
 class Counter extends React.Component {
-  increment = () => {};
+  increment = () => {
+    this.props.dispatch({ type: "INCREMENT" });
+  };
 
-  decrement = () => {};
+  decrement = () => {
+    this.props.dispatch({ type: "DECREMENT" });
+  };
 
   render() {
     return (

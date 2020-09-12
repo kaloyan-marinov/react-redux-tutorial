@@ -108,3 +108,11 @@ The object you return from `mapStateToProps` gets fed into your component as pro
 the component needs from a larger collection of state.
 
 3. It is **the connected component** that **needs to be wrapped with the `Provider` component**.
+
+# Dispatch Redux Actions from a React Component
+
+Once a component is `connect`ed, it contains relevant parts of the state as props. Now how can we dispatch actions - _from within the component!_ - to change those parts of the state?
+
+... in addition to passing in the (mapped) state, [`connect`] _also_ passes in the `dispatch` function from the store!
+
+To dispatch an action from inside the component, we can call `this.props.dispatch` with an action.
