@@ -37,3 +37,28 @@ Using the `connect` function that comes with `react-redux`, you can plug any com
 Under the hood, React-Redux uses React’s built-in Context API to pass data around... you can ... use Context directly. ... if your app is simple and you want an easy way to pass data around, Context might be perfect.
 
 2. Another Alternative: Use the children Prop
+
+# `redux` vs `react-redux`
+
+---
+
+`redux` gives you a **store**, and lets you keep state in it, and get state out, and respond when the state changes. But that’s all it does.
+
+It’s actually `react-redux` that lets you connect pieces of the state to React components.
+
+... `redux` knows nothing about React at all.
+
+The `redux` library can be used outside of a React app too.
+
+# Redux Has One Global Store
+
+---
+
+We’ve talked about how Redux keeps the **state** of your app in a single **store**. And how you can extract parts of that state and plug it into your components as props.
+
+You’ll often see the words “state” and “store” used interchangeably. Technically, the **state** is the data, and the **store** is where it’s kept.
+
+- as step 1 of our refactoring from plain React to Redux, we need to create a store to hold the state... Redux comes with a handy function that creates stores, and it’s called `createStore`. We have to provide a function that will return the state. That function is called a **reducer**...
+- Redux called your reducer at the time you created the store.
+- A Redux reducer is a function with a signature `(state, action) => newState`; reduces a set of actions (over time) into a single state; happens over the lifetime of your running app. It has another job, too: It should return the initial state the first time it’s called.
+- **Important Rule of Reducers #1**: Never return undefined from a reducer.
