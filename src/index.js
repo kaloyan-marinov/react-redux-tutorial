@@ -41,15 +41,15 @@ store.dispatch(createDecrementAction());
 
 class Counter extends React.Component {
   increment = () => {
-    this.props.dispatch(createIncrementAction());
+    this.props.createIncrementAction();
   };
 
   decrement = () => {
-    this.props.dispatch(createDecrementAction());
+    this.props.createDecrementAction();
   };
 
   reset = () => {
-    this.props.dispatch(createResetAction());
+    this.props.createResetAction();
   };
 
   render() {
@@ -72,7 +72,19 @@ function mapStateToProps(state) {
   return { count: state.count };
 }
 
-const ConnectedCount = connect(mapStateToProps)(Counter);
+/*
+In this object, keys become prop names
+and values should be Action Creator functions.
+They get bound to `dispatch`.
+... you’ll receive those Action Creators as *callable props*.
+*/
+const mapDispatchToProps = {
+  createIncrementAction,
+  createDecrementAction,
+  createResetAction,
+};
+
+const ConnectedCount = connect(mapStateToProps, mapDispatchToProps)(Counter);
 
 const App = () => (
   <Provider store={store}>
