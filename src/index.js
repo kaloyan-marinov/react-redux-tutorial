@@ -2,6 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import { createStore } from "redux";
+import { Provider } from "react-redux";
+import { connect } from "react-redux";
 
 /*
 The term “reducer” might seem a bit scary and foreign,
@@ -53,17 +55,12 @@ store.dispatch({ type: "INCREMENT" });
 store.dispatch({ type: "INCREMENT" });
 store.dispatch({ type: "DECREMENT" });
 store.dispatch({ type: "RESET" });
+store.dispatch({ type: "DECREMENT" });
 
 class Counter extends React.Component {
-  state = { count: 0 };
+  increment = () => {};
 
-  increment = () => {
-    this.setState({ count: this.state.count + 1 });
-  };
-
-  decrement = () => {
-    this.setState({ count: this.state.count - 1 });
-  };
+  decrement = () => {};
 
   render() {
     return (
@@ -71,7 +68,7 @@ class Counter extends React.Component {
         <h2>Container</h2>
         <div>
           <button onClick={this.decrement}>-</button>
-          <span>{this.state.count}</span>
+          <span>{this.props.count}</span>
           <button onClick={this.increment}>+</button>
         </div>
       </div>
@@ -79,10 +76,39 @@ class Counter extends React.Component {
   }
 }
 
+/*
+The object you return from mapStateToProps gets fed into your component as props.
+
+... usually you’ll be picking out pieces of data
+the component needs from a larger collection of state.
+
+(You could pass in all of the state, and let the component sort it out. That’s not a
+great habit to get into though, because the component will need to know the shape of
+the Redux state to pick out what it needs, and it’ll be harder to change that shape
+later, if you need.)
+*/
+function mapStateToProps(state) {
+  return { count: state.count };
+}
+
+const ConnectedCount = connect(mapStateToProps)(Counter);
+
+/*
+Wrapping the contents of a component with the `Provider` component
+enables all direct and indirect descendants to access the Redux store.
+
+But not automatically.
+We’ll need to use the `connect` function on our components to access the store.
+
+What `connect` does is hook into Redux, pull out the entire state,
+and pass it through the `mapStateToProps` function that you provide.
+This needs to be a custom function
+because only you know the “shape” of the state you’ve stored in Redux.
+*/
 const App = () => (
-  <div>
-    <Counter />
-  </div>
+  <Provider store={store}>
+    <ConnectedCount />
+  </Provider>
 );
 
 ReactDOM.render(<App />, document.getElementById("root"));

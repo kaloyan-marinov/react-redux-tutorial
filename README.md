@@ -85,3 +85,26 @@ Redux is built on the idea of immutability... with some simple rules.
 - State is read-only, and actions are the only way to modify it.
 - Changes happen one way, and one way only: dispatch(action) -> reducer -> new state.
 - The reducer function must be “pure” – it cannot modify its arguments, and it can’t have side effects.
+
+# How to Use React with Redux
+
+---
+
+1. Wrapping the contents of a component with the `Provider` component
+   enables all direct and indirect descendants to access the Redux store.
+
+**But not automatically.**
+We’ll need to use the `connect` function on our components to access the store.
+
+2. What `connect` does is hook into Redux, pull out the entire state,
+   and pass it through the `mapStateToProps` function that you provide.
+
+This needs to be a custom function
+because only you know the “shape” of the state you’ve stored in Redux.
+
+The object you return from `mapStateToProps` gets fed into your component as props.
+
+... usually you’ll be picking out pieces of data
+the component needs from a larger collection of state.
+
+3. It is **the connected component** that **needs to be wrapped with the `Provider` component**.
