@@ -62,6 +62,7 @@ You’ll often see the words “state” and “store” used interchangeably. T
 - Redux called your reducer at the time you created the store.
 - A Redux reducer is a function with a signature `(state, action) => newState`; reduces a set of actions (over time) into a single state; happens over the lifetime of your running app. It has another job, too: It should return the initial state the first time it’s called.
 - **Important Rule of Reducers #1**: Never return undefined from a reducer.
+- **Reducer Rule #2**: Reducers must be **pure functions**. (This means that they can’t modify their arguments, and they can’t have side effects.) (A “side effect” is any change to something outside the scope of the function. Don’t change variables outside the scope of the function, don’t call other functions that change things (like `fetch`, which affects the network and other systems), don’t dispatch actions, and so on.) The most important thing is this: **don’t modify the `state` argument**.
 
 # Dispatch Actions to Change the State
 
@@ -74,3 +75,13 @@ You’ll often see the words “state” and “store” used interchangeably. T
 The store we created earlier has a built-in function called `dispatch`. Call it with an action, and Redux will call your reducer with that action (and then replace the state with whatever your reducer returned).
 
 Every call to `dispatch` results in a call to your reducer!
+
+# All These Rules
+
+---
+
+Redux is built on the idea of immutability... with some simple rules.
+
+- State is read-only, and actions are the only way to modify it.
+- Changes happen one way, and one way only: dispatch(action) -> reducer -> new state.
+- The reducer function must be “pure” – it cannot modify its arguments, and it can’t have side effects.
