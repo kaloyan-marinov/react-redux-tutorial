@@ -17,3 +17,23 @@ More importantly, it’s not very good software design. Intermediate components 
 Wouldn’t it be nice if the components that didn’t need the data didn’t have to see it at all?
 
 Redux is one way to solve this problem.
+
+# The Benefits of Redux
+
+---
+
+If you have components that are siblings and need to share data, the way to do that in React is to pull that data up into a parent component and pass it down with props.
+
+Redux can help by giving you **one global “parent”** where you can store the data, and then you can `connect` the sibling components to the data with React-Redux.
+
+Using the `connect` function that comes with `react-redux`, you can plug any component into Redux’s **store** and pull out the data it needs.
+
+# Built-in Redux Alternatives
+
+---
+
+1. Redux Alternative: The React Context API
+
+Under the hood, React-Redux uses React’s built-in Context API to pass data around... you can ... use Context directly. ... if your app is simple and you want an easy way to pass data around, Context might be perfect.
+
+2. Another Alternative: Use the children Prop

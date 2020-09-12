@@ -2,13 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 
-/*
-As a quick review, here’s how this works:
-- The `state` is stored in the `Counter` component
-- [Whenever] state was [changes],
-  React re-renders the Counter component (and its children),
-  [using the new state].
-*/
 class Counter extends React.Component {
   state = { count: 0 };
 
