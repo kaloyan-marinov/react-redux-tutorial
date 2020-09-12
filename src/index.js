@@ -3,6 +3,11 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import { createStore } from "redux";
 import { INCREMENT, DECREMENT, RESET } from "./actions";
+import {
+  createIncrementAction,
+  createDecrementAction,
+  createResetAction,
+} from "./actions";
 import { Provider } from "react-redux";
 import { connect } from "react-redux";
 
@@ -28,23 +33,23 @@ function reducer(state = initialState, action) {
 const store = createStore(reducer);
 console.log("the store has just been created");
 
-store.dispatch({ type: INCREMENT });
-store.dispatch({ type: INCREMENT });
-store.dispatch({ type: DECREMENT });
-store.dispatch({ type: RESET });
-store.dispatch({ type: DECREMENT });
+store.dispatch(createIncrementAction());
+store.dispatch(createIncrementAction());
+store.dispatch(createDecrementAction());
+store.dispatch(createResetAction());
+store.dispatch(createDecrementAction());
 
 class Counter extends React.Component {
   increment = () => {
-    this.props.dispatch({ type: INCREMENT });
+    this.props.dispatch(createIncrementAction());
   };
 
   decrement = () => {
-    this.props.dispatch({ type: DECREMENT });
+    this.props.dispatch(createDecrementAction());
   };
 
   reset = () => {
-    this.props.dispatch({ type: RESET });
+    this.props.dispatch(createResetAction());
   };
 
   render() {
